@@ -39,16 +39,26 @@ namespace Kaenx.Creator.Models
             set { _transText = value; Changed("TranslationText"); }
         }
 
-        public string ChoosenLangText{
-            get{ 
-                Translation defTranslation = Text.FirstOrDefault(lang => lang.Language.CultureCode == Properties.Settings.Default.language);
-                if(defTranslation != null){
-                    return defTranslation.Text;
+        public string GetComObjDescr{
+            get{
+                string textDef = "", funcTextDef = "";
+                Translation textDefTrans = Text.FirstOrDefault(lang => lang.Language.CultureCode == Properties.Settings.Default.language);
+                if(textDefTrans != null){
+                    textDef = textDefTrans.Text;
                 }
-                return "";
+                Translation funcTextDefTrans = FunctionText.FirstOrDefault(lang => lang.Language.CultureCode == Properties.Settings.Default.language);
+                if(funcTextDefTrans != null){
+                    funcTextDef = funcTextDefTrans.Text;
                 }
-        }
 
+                // if there are no entrys for choosen language
+                if(textDef.Equals("") && funcTextDefTrans.Equals("")){
+                    return Number + ": " + Name;
+                }
+
+                return Number + ": " + Name + " (" + textDef + ", " + funcTextDef + ")";
+            }
+        }
 
         public ObservableCollection<Translation> FunctionText {get;set;} = new ObservableCollection<Translation>();
         private bool _transFuncText = false;
@@ -58,23 +68,12 @@ namespace Kaenx.Creator.Models
             set { _transFuncText = value; Changed("TranslationFunctionText"); }
         }
 
-        public string ChoosenLangFunctionText{
-            get{
-                Translation defTranslation = FunctionText.FirstOrDefault(lang => lang.Language.CultureCode == Properties.Settings.Default.language);
-                if(defTranslation != null){
-                    return defTranslation.Text;
-                }
-                return "";
-                }
-        }
-
         private int _numb = 0;
         public int Number
         {
             get { return _numb; }
             set { _numb = value; Changed("Number"); }
         }
-
 
         private FlagType _flagRead = FlagType.Disabled;
         public FlagType FlagRead
