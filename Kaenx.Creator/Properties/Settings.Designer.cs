@@ -25,7 +25,7 @@ namespace Kaenx.Creator.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("de")]
+        [global::System.Configuration.DefaultSettingValueAttribute("de-DE")]
         public string language {
             get {
                 return ((string)(this["language"]));

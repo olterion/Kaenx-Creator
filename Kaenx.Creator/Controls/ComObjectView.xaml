@@ -51,7 +51,15 @@
             AllowDrop="True" MouseMove="ListMouseMove" DragOver="ListDragOver" Drop="ListDrop">
             <ListBox.ItemTemplate>
 				<DataTemplate>
-					<TextBlock Text="{Binding Name}" Foreground="{Binding IsNotUsed, Converter={StaticResource BoolToBrush}}" />
+					<TextBlock Foreground="{Binding IsNotUsed, Converter={StaticResource BoolToBrush}}" >
+                        <TextBlock.Text>    
+                            <MultiBinding StringFormat="{}{0} ({1}, {2})">
+                                <Binding Path="Name" />
+                                <Binding Path="ChoosenLangText" />
+                                <Binding Path="ChoosenLangFunctionText" />
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
 				</DataTemplate>
 			</ListBox.ItemTemplate>
             <ListBox.ItemContainerStyle>

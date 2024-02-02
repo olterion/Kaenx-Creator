@@ -39,6 +39,16 @@ namespace Kaenx.Creator.Models
             set { _transText = value; Changed("TranslationText"); }
         }
 
+        public string ChoosenLangText{
+            get{ 
+                Translation defTranslation = Text.FirstOrDefault(lang => lang.Language.CultureCode == Properties.Settings.Default.language);
+                if(defTranslation != null){
+                    return defTranslation.Text;
+                }
+                return "";
+                }
+        }
+
 
         public ObservableCollection<Translation> FunctionText {get;set;} = new ObservableCollection<Translation>();
         private bool _transFuncText = false;
@@ -48,6 +58,15 @@ namespace Kaenx.Creator.Models
             set { _transFuncText = value; Changed("TranslationFunctionText"); }
         }
 
+        public string ChoosenLangFunctionText{
+            get{
+                Translation defTranslation = FunctionText.FirstOrDefault(lang => lang.Language.CultureCode == Properties.Settings.Default.language);
+                if(defTranslation != null){
+                    return defTranslation.Text;
+                }
+                return "";
+                }
+        }
 
         private int _numb = 0;
         public int Number
